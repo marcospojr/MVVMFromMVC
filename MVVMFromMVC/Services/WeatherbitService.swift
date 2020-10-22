@@ -42,7 +42,7 @@ enum WeatherbitError: Error {
 class WeatherbitService {
   typealias WeatherDataCompletion = (WeatherbitData?, WeatherbitError?) -> ()
   
-  private static let apiKey = "your key goes here"
+  private static let apiKey = "e215b7f1b2164e5882c7aa5813de3896"
   private static let host = "api.weatherbit.io"
   private static let path = "/v2.0/current"
   private static let fahrenheit = "I"
