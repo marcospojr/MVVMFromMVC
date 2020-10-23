@@ -33,10 +33,17 @@
 import UIKit.UIImage
 
 public class WeatherViewModel {
-  private static let defaultAddress = "Uberlândia, MG"
   private let geocoder = LocationGeocoder()
+  private static let defaultAddress = "Uberlândia, MG"
+  
+  private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE, MMM d"
+    return dateFormatter
+  }()
   
   let locationName = Box("Loading...")
+  let date = Box(" ")
   
   func changeLocation(to newLocation: String) {
     locationName.value = "Loading..."
@@ -55,12 +62,13 @@ public class WeatherViewModel {
       latitude: location.latitude,
       longitude: location.longitude) { [weak self] (weatherData, error) in
         guard
-          let self = self,
+          let _ = self,
           let weatherData = weatherData
           else {
             return
           }
-    }
+        self?.date.value = self!.dateFormatter.string(from: weatherData.date)
+        }
   }
   
   init() {
