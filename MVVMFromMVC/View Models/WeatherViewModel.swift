@@ -55,11 +55,6 @@ public class WeatherViewModel {
     return tempFormatter
   }()
   
-  
-  init() {
-    changeLocation(to: Self.defaultAddress)
-  }
-  
   func changeLocation(to newLocation: String) {
     locationName.value = "Loading..."
     geocoder.geocode(addressString: newLocation) { [weak self] locations in
@@ -94,5 +89,9 @@ public class WeatherViewModel {
       self?.summary.value = "\(weatherData.description) - \(temp)ºF"
       self?.forecastSummary.value = "\nSummary: \(weatherData.description)"
       }
+  }
+  
+  init() {
+    changeLocation(to: Self.defaultAddress)
   }
 }
